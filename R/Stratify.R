@@ -1,4 +1,32 @@
+#' Stratify a raster Stack into the best fitting classes
+#'
+#' @param Stack a raster stack with all the variables used for generating the classes.
+#' @param LowGroup an integer number, the lowest number of groups to test for.
+#' @param HighGroup an integer number, the highest number of groups to test for.
+#' @param Criterion either calinski or ssi, the criterion used for selecting the best number of groups.
+#'
+#' @return a list with the raster for the best classes and a dataframe with the best results
+#' @importFrom dplyr filter_all
+#' @importFrom dplyr mutate
+#' @importFrom janitor clean_names
+#' @importFrom raster as.data.frame
+#' @importFrom raster values
+#' @importFrom tibble rowid_to_column
+#' @importFrom vegan cascadeKM
+#' @importFrom stringr str_remove_all
+#' @export
+#'
+#' @examples
+#' data(Bios)
+#'
+#' a <- Stratify(Bios)
+#'
+#' library(raster)
+#'
+#' plot(a$FinalStack, colNA = "black")
+
 Stratify <- function(Stack = NULL, LowGroup = 2, HighGroup = 10, Criterion = "calinski"){
+  Groups <- n_groups <- calinski <- ssi <- NULL
   DF <- Stack %>%
     raster::as.data.frame() %>%
     tibble::rowid_to_column(var = "ID") %>%
@@ -25,9 +53,9 @@ Stratify <- function(Stack = NULL, LowGroup = 2, HighGroup = 10, Criterion = "ca
   Final <- Partition %>% dplyr::select(Select$Groups)
 
   FinalStack <- Stack[[1]]
-  values(FinalStack) <- NA
+  raster::values(FinalStack) <- NA
 
-  values(FinalStack)[DF$ID] <- Final[,1]
+  raster::values(FinalStack)[DF$ID] <- Final[,1]
 
   Results <- Results %>%
     dplyr::select(-Groups) %>%
