@@ -26,4 +26,7 @@ Imports:
     vegan,
     janitor,
     stringr,
-    magrittr
+    magrittr,
+    dismo,
+    sf,
+    spThin
