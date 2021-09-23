@@ -38,6 +38,10 @@
 Random_Stratified_Min_Dist <- function(ClassRaster = NULL, MinDist = NULL, n = NULL, n_to_test = 100){
   Values <- raster::unique(ClassRaster)
 
+  Contours <- stars::st_as_stars(FinalRaster) %>%
+    stars::st_contour() %>%
+    sf::st_cast(to = "MULTILINESTRING")
+
   Samples <- list()
   for(i in 1:length(Values)){
     m <- c(Values[i] - 0.1, Values[i] + 0.1, Values[i],
@@ -54,6 +58,21 @@ Random_Stratified_Min_Dist <- function(ClassRaster = NULL, MinDist = NULL, n = N
 
  Samples <- do.call("rbind", Samples)
 
+ ## Eliminate close to the edges
+
+ Temp <- Samples %>%
+   st_as_sf(coords = c("x", "y"), crs = raster::projection(ClassRaster))
+
+ Temp <- Temp %>%
+   sf::st_distance(Contours) %>%
+   as.matrix() %>%
+   apply(2, as.numeric) %>%
+   apply(1, min)
+
+ Cond <- Points$Temp < MinDist
+
+ Samples[Cond,]
+
  Thined <- spThin::thin(Samples, lat.col = "y", long.col = "x", spec.col = "Sp", thin.par = MinDist/1000,locs.thinned.list.return = T, write.files = F, write.log.file = F, verbose = F, reps = 1)
  Thined <- Thined[[1]]
  colnames(Thined) <- c("x", "y")
@@ -61,7 +80,8 @@ Random_Stratified_Min_Dist <- function(ClassRaster = NULL, MinDist = NULL, n = N
    dplyr::select(-Sp) %>%
    dplyr::group_by(Class) %>%
    dplyr::slice_sample(n = n) %>%
-   dplyr::ungroup()
+   dplyr::ungroup() %>%
+   st_as_sf(coords = c("x", "y"), crs = raster::projection(ClassRaster))
 
-  return(Thined)
+  return(list(Thined = Thined, Temp = Temp))
 }
