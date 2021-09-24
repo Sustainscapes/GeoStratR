@@ -99,7 +99,8 @@ Random_Stratified_Min_Dist <- function(ClassRaster = NULL, MinDist = NULL, n = N
 
  Cond <- Temp > MinDist
 
- Samples <- Samples[Cond,]
+ Samples <- Samples[Cond,] %>%
+   sf::st_transform(crs = "+proj=longlat +datum=WGS84 +no_defs")
 
  Thined <- spThin::thin(Samples, lat.col = "y", long.col = "x", spec.col = "Sp", thin.par = MinDist/1000,locs.thinned.list.return = T, write.files = F, write.log.file = F, verbose = F, reps = 1)
  Thined <- Thined[[1]]
@@ -109,7 +110,8 @@ Random_Stratified_Min_Dist <- function(ClassRaster = NULL, MinDist = NULL, n = N
    dplyr::group_by(Class) %>%
    dplyr::slice_sample(n = n) %>%
    dplyr::ungroup() %>%
-   st_as_sf(coords = c("x", "y"), crs = raster::projection(ClassRaster))
+   st_as_sf(coords = c("x", "y"), crs = "+proj=longlat +datum=WGS84 +no_defs") %>%
+   sf::st_transform(crs = raster::projection(ClassRaster))
 
  Thined <- Thined %>%
    dplyr::group_split(Class)
