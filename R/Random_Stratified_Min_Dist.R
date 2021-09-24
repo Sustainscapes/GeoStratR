@@ -76,7 +76,7 @@ Random_Stratified_Min_Dist <- function(ClassRaster = NULL, MinDist = NULL, n = N
    apply(2, as.numeric) %>%
    apply(1, min)
 
- Cond <- Temp < MinDist
+ Cond <- Temp > MinDist
 
  Samples <- Samples[Cond,]
 
@@ -97,7 +97,7 @@ Random_Stratified_Min_Dist <- function(ClassRaster = NULL, MinDist = NULL, n = N
     apply(2, as.numeric) %>%
     apply(1, min)
 
- Cond <- Temp < MinDist
+ Cond <- Temp > MinDist
 
  Samples <- Samples[Cond,]
 
