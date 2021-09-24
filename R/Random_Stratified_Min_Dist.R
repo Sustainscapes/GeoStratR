@@ -68,7 +68,7 @@ Random_Stratified_Min_Dist <- function(ClassRaster = NULL, MinDist = NULL, n = N
    st_as_sf(coords = c("x", "y"), crs = raster::projection(ClassRaster))
 
  Contours <- Contours %>%
-    sf::st_transform(crs == st_crs(Temp))
+    sf::st_transform(crs = st_crs(Temp))
 
  Temp <- Temp %>%
    sf::st_distance(Contours) %>%
