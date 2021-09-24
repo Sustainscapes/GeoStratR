@@ -83,5 +83,5 @@ Random_Stratified_Min_Dist <- function(ClassRaster = NULL, MinDist = NULL, n = N
    dplyr::ungroup() %>%
    st_as_sf(coords = c("x", "y"), crs = raster::projection(ClassRaster))
 
-  return(list(Thined = Thined, Temp = Temp))
+  return(Thined)
 }
