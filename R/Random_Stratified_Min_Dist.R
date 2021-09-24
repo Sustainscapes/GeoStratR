@@ -36,9 +36,12 @@
 #'                                      n_to_test = 100)
 #'
 Random_Stratified_Min_Dist <- function(ClassRaster = NULL, MinDist = NULL, n = NULL, n_to_test = 100){
+
+  x <- y <- Sp <- Class <- NULL
+
   Values <- raster::unique(ClassRaster)
 
-  Contours <- stars::st_as_stars(FinalRaster) %>%
+  Contours <- stars::st_as_stars(ClassRaster) %>%
     stars::st_contour() %>%
     sf::st_cast(to = "MULTILINESTRING")
 
@@ -69,7 +72,7 @@ Random_Stratified_Min_Dist <- function(ClassRaster = NULL, MinDist = NULL, n = N
    apply(2, as.numeric) %>%
    apply(1, min)
 
- Cond <- Points$Temp < MinDist
+ Cond <- Temp < MinDist
 
  Samples[Cond,]
 
