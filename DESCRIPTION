@@ -32,5 +32,6 @@ Imports:
     sf,
     spThin,
     stars,
-    tibble
+    tibble,
+    rgdal
 VignetteBuilder: knitr
