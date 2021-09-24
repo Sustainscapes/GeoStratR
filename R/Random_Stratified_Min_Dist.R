@@ -25,7 +25,7 @@
 #' a <- Stratify(Bios)
 #'
 #' library(raster)
-#'
+#')
 #' plot(a$FinalStack, colNA = "black")
 #'
 #' FinalRaster <- a$FinalStack
@@ -37,7 +37,7 @@
 #'
 Random_Stratified_Min_Dist <- function(ClassRaster = NULL, MinDist = NULL, n = NULL, n_to_test = 100){
 
-  x <- y <- Sp <- Class <- NULL
+  x <- y <- Sp <- Class <- ID <- NULL
 
   Values <- raster::unique(ClassRaster)
 
@@ -65,7 +65,7 @@ Random_Stratified_Min_Dist <- function(ClassRaster = NULL, MinDist = NULL, n = N
  ## Eliminate close to the edges
 
  Temp <- Samples %>%
-   st_as_sf(coords = c("x", "y"), crs = raster::projection(ClassRaster))
+   sf::st_as_sf(coords = c("x", "y"), crs = raster::projection(ClassRaster))
 
  Contours <- Contours %>%
     sf::st_transform(crs = sf::st_crs(Temp))
@@ -100,17 +100,25 @@ Random_Stratified_Min_Dist <- function(ClassRaster = NULL, MinDist = NULL, n = N
  Cond <- Temp > MinDist
 
  Samples <- Samples[Cond,] %>%
+   sf::st_as_sf(coords = c("x", "y"), crs = raster::projection(ClassRaster)) %>%
    sf::st_transform(crs = "+proj=longlat +datum=WGS84 +no_defs")
 
- Thined <- spThin::thin(Samples, lat.col = "y", long.col = "x", spec.col = "Sp", thin.par = MinDist/1000,locs.thinned.list.return = T, write.files = F, write.log.file = F, verbose = F, reps = 1)
+ Coordinates <- sf::st_coordinates(Samples)
+
+ Samples <- Samples %>%
+   as.data.frame() %>%
+   dplyr::select("Class", "Sp") %>%
+   cbind(Coordinates)
+
+ Thined <- spThin::thin(Samples, lat.col = "Y", long.col = "X", spec.col = "Sp", thin.par = MinDist/1000,locs.thinned.list.return = T, write.files = F, write.log.file = F, verbose = F, reps = 1)
  Thined <- Thined[[1]]
- colnames(Thined) <- c("x", "y")
+ colnames(Thined) <- c("X", "Y")
  Thined <- dplyr::left_join(Thined, Samples) %>%
    dplyr::select(-Sp) %>%
    dplyr::group_by(Class) %>%
    dplyr::slice_sample(n = n) %>%
    dplyr::ungroup() %>%
-   st_as_sf(coords = c("x", "y"), crs = "+proj=longlat +datum=WGS84 +no_defs") %>%
+   sf::st_as_sf(coords = c("X", "Y"), crs = "+proj=longlat +datum=WGS84 +no_defs") %>%
    sf::st_transform(crs = raster::projection(ClassRaster))
 
  Thined <- Thined %>%
