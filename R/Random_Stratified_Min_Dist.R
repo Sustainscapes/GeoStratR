@@ -41,9 +41,9 @@ Random_Stratified_Min_Dist <- function(ClassRaster = NULL, MinDist = NULL, n = N
 
   Values <- raster::unique(ClassRaster)
 
-  Contours <- stars::st_as_stars(ClassRaster) %>%
+  Contours <- {suppressWarnings(stars::st_as_stars(ClassRaster) %>%
     stars::st_contour() %>%
-    sf::st_cast(to = "MULTILINESTRING")
+    sf::st_cast(to = "MULTILINESTRING"))}
 
   Samples <- list()
   for(i in 1:length(Values)){
@@ -85,6 +85,21 @@ Random_Stratified_Min_Dist <- function(ClassRaster = NULL, MinDist = NULL, n = N
    dplyr::slice_sample(n = n) %>%
    dplyr::ungroup() %>%
    st_as_sf(coords = c("x", "y"), crs = raster::projection(ClassRaster))
+
+ Thined <- Thined %>%
+   dplyr::group_split(Class)
+
+ for(i in 1:length(Thined)){
+   Thined[[i]] <- Thined[[i]] %>%
+     tibble::rowid_to_column(var = "ID")
+ }
+
+ Thined <- do.call(rbind, Thined)
+
+ DIGITS <- max(floor(log10(Thined$ID)))
+
+ Thined <- Thined %>%
+   mutate(ID = formatC(ID, digits = DIGITS, flag = "0"), ID = paste0(Class, ID))
 
   return(Thined)
 }
