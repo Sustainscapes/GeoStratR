@@ -80,6 +80,27 @@ Random_Stratified_Min_Dist <- function(ClassRaster = NULL, MinDist = NULL, n = N
 
  Samples <- Samples[Cond,]
 
+ Contours2 <- {suppressWarnings(stars::st_as_stars(ClassRaster) %>%
+                                  stars::st_contour(breaks = c(-Inf, Inf)) %>%
+                                  sf::st_cast(to = "MULTILINESTRING")) %>%
+       st_as_sf(crs = raster::projection(ClassRaster))}
+
+ Temp <- Samples %>%
+    st_as_sf(coords = c("x", "y"), crs = raster::projection(ClassRaster))
+
+ Contours2 <- Contours2 %>%
+    sf::st_transform(crs = sf::st_crs(Temp))
+
+ Temp <- Temp %>%
+    sf::st_distance(Contours2) %>%
+    as.matrix() %>%
+    apply(2, as.numeric) %>%
+    apply(1, min)
+
+ Cond <- Temp < MinDist
+
+ Samples <- Samples[Cond,]
+
  Thined <- spThin::thin(Samples, lat.col = "y", long.col = "x", spec.col = "Sp", thin.par = MinDist/1000,locs.thinned.list.return = T, write.files = F, write.log.file = F, verbose = F, reps = 1)
  Thined <- Thined[[1]]
  colnames(Thined) <- c("x", "y")
