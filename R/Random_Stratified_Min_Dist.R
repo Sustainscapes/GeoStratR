@@ -43,7 +43,8 @@ Random_Stratified_Min_Dist <- function(ClassRaster = NULL, MinDist = NULL, n = N
 
   Contours <- {suppressWarnings(stars::st_as_stars(ClassRaster) %>%
     stars::st_contour() %>%
-    sf::st_cast(to = "MULTILINESTRING"))}
+    sf::st_cast(to = "MULTILINESTRING")) %>%
+        st_as_sf(crs = raster::projection(ClassRaster))}
 
   Samples <- list()
   for(i in 1:length(Values)){
