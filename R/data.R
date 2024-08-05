@@ -1,6 +1,6 @@
 #' Four bioclimatic variables for Denmark.
 #'
-#' A rasterstack containing four biolcimatic variables for Denmark
+#' A PackedSpatRaster containing four biolcimatic variables for Denmark
 #'
 #' @format A rasterstack with 4 layers:
 #' \describe{

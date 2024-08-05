@@ -1,6 +1,6 @@
 Package: GeoStratR
 Title: Simple Spatial Stratification of Rasters
-Version: 0.0.0.9000
+Version: 0.0.1
 Authors@R: 
     person(given = "Derek",
            family = "Corcoran",
@@ -13,25 +13,22 @@ License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.3.1
 Depends: 
-    R (>= 2.10)
+    R (>= 4.2)
 Suggests: 
     rmarkdown,
     knitr,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Imports: 
-    raster,
     dplyr,
     vegan,
     janitor,
     stringr,
     magrittr,
-    dismo,
-    sf,
     spThin,
-    stars,
     tibble,
-    rgdal
+    terra,
+    purrr
 VignetteBuilder: knitr

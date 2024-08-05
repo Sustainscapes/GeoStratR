@@ -8,8 +8,6 @@
 [![R-CMD-check](https://github.com/Sustainscapes/GeoStratR/workflows/R-CMD-check/badge.svg)](https://github.com/Sustainscapes/GeoStratR/actions)
 <!-- badges: end -->
 
-The goal of GeoStratR is to …
-
 ## Installation
 
 You can install the released version of GeoStratR from
@@ -26,38 +24,167 @@ And the development version from [GitHub](https://github.com/) with:
 devtools::install_github("Sustainscapes/GeoStratR")
 ```
 
-## Example
-
-This is a basic example which shows you how to solve a common problem:
+The goal of this package is to Stratify spatial areas based on raster
+and then generate stratified random sampling schemes for such strata, as
+an example we will show how to generate a stratified sampling scheme for
+Denmark based on for bioclimatic variables, for this we will use the
+internall dataset bios, as can be seen in the next figure:
 
 ``` r
 library(GeoStratR)
-## basic example code
+library(terra)
+#> terra 1.7.78
 ```
-
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
 
 ``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
+data("Bios")
+Bios <- terra::unwrap(Bios)
 ```
 
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this. You could also
-use GitHub Actions to re-render `README.Rmd` every time you push. An
-example workflow can be found here:
-<https://github.com/r-lib/actions/tree/master/examples>.
+``` r
+plot(Bios)
+```
 
-You can also embed plots, for example:
+<img src="man/figures/README-BiosPlot-1.png" width="100%" />
 
-<img src="man/figures/README-pressure-1.png" width="100%" />
+## Optimal strata
 
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub and CRAN.
+To stratify we can use the function `Stratify`, which automatically
+determines the optimal number of classes by evaluating a range of
+possible groupings. This function performs k-means clustering on the
+raster stack, testing from a minimum to a maximum number of groups
+specified by the user. It then selects the best number of groups based
+on a chosen criterion.
+
+The Stratify function allows you to choose between two criteria for
+selecting the optimal number of classes:
+
+- **Calinski-Harabasz Index** (“calinski”): This criterion measures the
+  variance between clusters relative to the variance within clusters. A
+  higher Calinski-Harabasz index indicates a better-defined and more
+  distinct clustering structure, making it suitable for identifying
+  well-separated groups.
+
+- **simple structure index** (“ssi”): This criterion assesses how
+  similar an object is to its own cluster compared to other clusters. A
+  higher silhouette width indicates that the clustering is more cohesive
+  and that objects are more appropriately assigned to their respective
+  clusters.
+
+By leveraging these criteria, the Stratify function ensures that the
+chosen number of groups provides the best balance between within-cluster
+homogeneity and between-cluster separation. The output includes a raster
+layer where each pixel is assigned to the optimal class, as well as a
+dataframe summarizing the performance of each tested grouping. This
+enables users to visualize and analyze the stratified areas effectively.
+
+Here’s how you can use the Stratify function with the Bios dataset to
+determine the optimal number of classes and visualize the results:
+
+``` r
+result <- Stratify(Bios, LowGroup = 2, HighGroup = 10, Criterion = "calinski")
+```
+
+# View the results
+
+From there we can see the
+
+``` r
+result$Results
+```
+
+|       SSE | calinski | n_groups |
+|----------:|---------:|---------:|
+| 1835438.9 | 18088.99 |        5 |
+| 2413170.4 | 18064.95 |        4 |
+| 1263139.5 | 17782.43 |        7 |
+| 1087910.6 | 17774.13 |        8 |
+|  962866.6 | 17624.99 |        9 |
+| 1536113.7 | 17425.12 |        6 |
+|  880202.3 | 17170.34 |       10 |
+| 4499626.3 | 13709.32 |        3 |
+| 9258256.1 | 11495.11 |        2 |
+
+Calinski ctiterion vs number of partitions
+
+# Plot the final raster stack with the optimal classes
+
+``` r
+plot(result$FinalStack, colNA = "black")
+```
+
+<img src="man/figures/README-CalinskiPlot-1.png" width="100%" />
+
+In this example, the Stratify function will test different numbers of
+classes from 2 to 10, using the Calinski-Harabasz index to determine the
+best grouping. The resulting raster will display the optimal
+stratification, and the results dataframe will provide details on how
+each number of groups performed according to the selected criterion.
+
+This approach allows for a robust and data-driven method of stratifying
+spatial data, ensuring that the generated classes are both meaningful
+and effective for subsequent analyses.
+
+## Stratified sampling
+
+After determining the optimal strata, you can use the function
+Random_Stratified_Min_Dist to generate a random stratified sampling
+scheme. This function ensures that the sample points are distributed
+with a minimum distance both from other points within the same stratum
+and from the stratum borders. If you do not specify a minimum distance
+to the border, the same distance used for spacing between points will be
+applied to the border as well.
+
+Here’s an example of how to use this function:
+
+``` r
+Points <- Random_Stratified_Min_Dist(ClassRaster = result$FinalStack,
+                                     MinDist = 2000,
+                                     BorderDist = 5000,
+                                     n = 30,
+                                     n_to_test = 100)
+#> Joining with `by = join_by(x, y)`
+```
+
+The resulting plot shows the stratified sampling points overlaid on the
+optimal strata:
+
+<img src="man/figures/README-plotSampl-1.png" width="100%" />
+
+This approach ensures a very balanced sampling:
+
+``` r
+table(Points$Class)
+#> 
+#>  A  B  C  D  E 
+#> 30 30 30 30 30
+```
+
+The Random_Stratified_Min_Dist function is robust and can handle cases
+where some classes cannot achieve the desired number of points. For
+example:
+
+``` r
+Points2 <- Random_Stratified_Min_Dist(ClassRaster = result$FinalStack,
+                                     MinDist = 2000,
+                                     BorderDist = 10000,
+                                     n = 500,
+                                     n_to_test = 10000)
+#> Joining with `by = join_by(x, y)`
+```
+
+Even if some classes cannot meet the target of 500 points, the function
+still works effectively:
+
+``` r
+table(Points2$Class)
+#> 
+#>   A   B   C   D   E 
+#> 464 335 500 500 500
+```
+
+This flexibility ensures that your sampling scheme is both effective and
+adaptable to varying conditions within your study area. By maintaining
+minimum distances, the function helps prevent clustering of sample
+points and ensures a more representative and unbiased sampling
+distribution across the strata.

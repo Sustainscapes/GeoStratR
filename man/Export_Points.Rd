@@ -23,10 +23,11 @@ Export created points
 }
 \examples{
 data(Bios)
+library(terra)
+Bios <- terra::unwrap(Bios)
 
 a <- Stratify(Bios)
 
-library(raster)
 
 plot(a$FinalStack, colNA = "black")
 
@@ -38,4 +39,6 @@ Points <- Random_Stratified_Min_Dist(ClassRaster = FinalRaster,
                                      n_to_test = 100)
 
 Export_Points(Points, name = "Selected")
+# remove created files
+file.remove(list.files(pattern = "Selected"))
 }

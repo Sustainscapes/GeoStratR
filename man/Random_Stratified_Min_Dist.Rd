@@ -7,6 +7,7 @@
 Random_Stratified_Min_Dist(
   ClassRaster = NULL,
   MinDist = NULL,
+  BorderDist = NULL,
   n = NULL,
   n_to_test = 100
 )
@@ -15,6 +16,8 @@ Random_Stratified_Min_Dist(
 \item{ClassRaster}{a raster with the classes of your site as integers.}
 
 \item{MinDist}{Minimum distance of a random point to the sampling points and cells with other classes.}
+
+\item{BorderDist}{Minumum distance of a random point to the border of its class, if NULL if reverst to MinDist.}
 
 \item{n}{Number of points per class can be one number or a vector specifying de number per class.}
 
@@ -29,9 +32,12 @@ Stratify a raster Stack into the best fitting classes
 \examples{
 data(Bios)
 
+library(terra)
+
+Bios <- terra::unwrap(Bios)
+
 a <- Stratify(Bios)
 
-library(raster)
 
 plot(a$FinalStack, colNA = "black")
 

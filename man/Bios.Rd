@@ -20,6 +20,6 @@ A rasterstack with 4 layers:
 Bios
 }
 \description{
-A rasterstack containing four biolcimatic variables for Denmark
+A PackedSpatRaster containing four biolcimatic variables for Denmark
 }
 \keyword{datasets}

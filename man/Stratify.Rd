@@ -7,7 +7,7 @@
 Stratify(Stack = NULL, LowGroup = 2, HighGroup = 10, Criterion = "calinski")
 }
 \arguments{
-\item{Stack}{a raster stack with all the variables used for generating the classes.}
+\item{Stack}{a spatraster with all the variables used for generating the classes.}
 
 \item{LowGroup}{an integer number, the lowest number of groups to test for.}
 
@@ -23,10 +23,10 @@ Stratify a raster Stack into the best fitting classes
 }
 \examples{
 data(Bios)
-
+Bios <- terra::unwrap(Bios)
 a <- Stratify(Bios)
 
-library(raster)
+library(terra)
 
 plot(a$FinalStack, colNA = "black")
 }
