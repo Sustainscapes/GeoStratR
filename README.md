@@ -5,7 +5,7 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/Sustainscapes/GeoStratR/workflows/R-CMD-check/badge.svg)](https://github.com/Sustainscapes/GeoStratR/actions)
+[![R-CMD-check](https://github.com/Sustainscapes/GeoStratR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Sustainscapes/GeoStratR/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 ## Installation
@@ -95,10 +95,10 @@ result$Results
 
 |       SSE | calinski | n_groups |
 |----------:|---------:|---------:|
-| 1835438.9 | 18088.99 |        5 |
+| 1835439.6 | 18088.99 |        5 |
 | 2413170.4 | 18064.95 |        4 |
 | 1263139.5 | 17782.43 |        7 |
-| 1087910.6 | 17774.13 |        8 |
+| 1087909.5 | 17774.15 |        8 |
 |  962866.6 | 17624.99 |        9 |
 | 1536113.7 | 17425.12 |        6 |
 |  880202.3 | 17170.34 |       10 |
@@ -180,7 +180,7 @@ still works effectively:
 table(Points2$Class)
 #> 
 #>   A   B   C   D   E 
-#> 464 335 500 500 500
+#> 500 462 335 500 500
 ```
 
 This flexibility ensures that your sampling scheme is both effective and
