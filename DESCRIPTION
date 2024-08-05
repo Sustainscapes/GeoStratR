@@ -32,3 +32,4 @@ Imports:
     terra,
     purrr
 VignetteBuilder: knitr
+URL: https://sustainscapes.github.io/GeoStratR/
