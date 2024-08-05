@@ -6,19 +6,20 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>How to use the GeoStratR package • GeoStratR</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="How to use the GeoStratR package">
-<meta property="og:description" content="GeoStratR">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,25 +32,19 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">GeoStratR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
-     
+
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
@@ -57,6 +52,9 @@
       <a href="../articles/how-to-use-GeoStratR.html">How to use the GeoStratR package</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right"></ul>
@@ -67,15 +65,15 @@
 </div>
 <!--/.navbar -->
 
-      
 
-      </header><script src="how-to-use-GeoStratR_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>How to use the GeoStratR package</h1>
             
       
-      
+
       <div class="hidden name"><code>how-to-use-GeoStratR.Rmd</code></div>
 
     </div>
@@ -83,7 +81,183 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">GeoStratR</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">GeoStratR</span><span class="op">)</span></span></code></pre></div>
+<p>The goal of this package is to Stratify spatial areas based on raster
+and then generate stratified random sampling schemes for such strata, as
+an example we will show how to generate a stratified sampling scheme for
+Denmark based on for bioclimatic variables, for this we will use the
+internall dataset bios, as can be seen in the next figure:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/" class="external-link">terra</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; terra 1.7.78</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"Bios"</span><span class="op">)</span></span>
+<span><span class="va">Bios</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/wrap.html" class="external-link">unwrap</a></span><span class="op">(</span><span class="va">Bios</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">Bios</span><span class="op">)</span></span></code></pre></div>
+<p><img src="how-to-use-GeoStratR_files/figure-html/BiosPlot-1.png" width="700"></p>
+<div class="section level3">
+<h3 id="optimal-strata">Optimal strata<a class="anchor" aria-label="anchor" href="#optimal-strata"></a>
+</h3>
+<p>To stratify we can use the function <code>Stratify</code>, which
+automatically determines the optimal number of classes by evaluating a
+range of possible groupings. This function performs k-means clustering
+on the raster stack, testing from a minimum to a maximum number of
+groups specified by the user. It then selects the best number of groups
+based on a chosen criterion.</p>
+<p>The Stratify function allows you to choose between two criteria for
+selecting the optimal number of classes:</p>
+<ul>
+<li><p><strong>Calinski-Harabasz Index</strong> (“calinski”): This
+criterion measures the variance between clusters relative to the
+variance within clusters. A higher Calinski-Harabasz index indicates a
+better-defined and more distinct clustering structure, making it
+suitable for identifying well-separated groups.</p></li>
+<li><p><strong>simple structure index</strong> (“ssi”): This criterion
+assesses how similar an object is to its own cluster compared to other
+clusters. A higher silhouette width indicates that the clustering is
+more cohesive and that objects are more appropriately assigned to their
+respective clusters.</p></li>
+</ul>
+<p>By leveraging these criteria, the Stratify function ensures that the
+chosen number of groups provides the best balance between within-cluster
+homogeneity and between-cluster separation. The output includes a raster
+layer where each pixel is assigned to the optimal class, as well as a
+dataframe summarizing the performance of each tested grouping. This
+enables users to visualize and analyze the stratified areas
+effectively.</p>
+<p>Here’s how you can use the Stratify function with the Bios dataset to
+determine the optimal number of classes and visualize the results:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Stratify.html">Stratify</a></span><span class="op">(</span><span class="va">Bios</span>, LowGroup <span class="op">=</span> <span class="fl">2</span>, HighGroup <span class="op">=</span> <span class="fl">10</span>, Criterion <span class="op">=</span> <span class="st">"calinski"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: Quick-TRANSfer stage steps exceeded maximum (= 178550)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="view-the-results">View the results<a class="anchor" aria-label="anchor" href="#view-the-results"></a>
+</h2>
+<p>From there we can see the</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">result</span><span class="op">$</span><span class="va">Results</span></span></code></pre></div>
+<table class="table">
+<caption>Calinski ctiterion vs number of partitions</caption>
+<thead><tr class="header">
+<th align="right">SSE</th>
+<th align="right">calinski</th>
+<th align="right">n_groups</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">1835439.6</td>
+<td align="right">18088.99</td>
+<td align="right">5</td>
+</tr>
+<tr class="even">
+<td align="right">2413170.4</td>
+<td align="right">18064.95</td>
+<td align="right">4</td>
+</tr>
+<tr class="odd">
+<td align="right">1263141.6</td>
+<td align="right">17782.40</td>
+<td align="right">7</td>
+</tr>
+<tr class="even">
+<td align="right">1087909.5</td>
+<td align="right">17774.15</td>
+<td align="right">8</td>
+</tr>
+<tr class="odd">
+<td align="right">962866.6</td>
+<td align="right">17624.99</td>
+<td align="right">9</td>
+</tr>
+<tr class="even">
+<td align="right">1536113.7</td>
+<td align="right">17425.12</td>
+<td align="right">6</td>
+</tr>
+<tr class="odd">
+<td align="right">880202.3</td>
+<td align="right">17170.34</td>
+<td align="right">10</td>
+</tr>
+<tr class="even">
+<td align="right">4499626.3</td>
+<td align="right">13709.32</td>
+<td align="right">3</td>
+</tr>
+<tr class="odd">
+<td align="right">9258256.1</td>
+<td align="right">11495.11</td>
+<td align="right">2</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section level2">
+<h2 id="plot-the-final-raster-stack-with-the-optimal-classes">Plot the final raster stack with the optimal classes<a class="anchor" aria-label="anchor" href="#plot-the-final-raster-stack-with-the-optimal-classes"></a>
+</h2>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">$</span><span class="va">FinalStack</span>, colNA <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="how-to-use-GeoStratR_files/figure-html/CalinskiPlot-1.png" width="700"></p>
+<p>In this example, the Stratify function will test different numbers of
+classes from 2 to 10, using the Calinski-Harabasz index to determine the
+best grouping. The resulting raster will display the optimal
+stratification, and the results dataframe will provide details on how
+each number of groups performed according to the selected criterion.</p>
+<p>This approach allows for a robust and data-driven method of
+stratifying spatial data, ensuring that the generated classes are both
+meaningful and effective for subsequent analyses.</p>
+<div class="section level3">
+<h3 id="stratified-sampling">Stratified sampling<a class="anchor" aria-label="anchor" href="#stratified-sampling"></a>
+</h3>
+<p>After determining the optimal strata, you can use the function
+Random_Stratified_Min_Dist to generate a random stratified sampling
+scheme. This function ensures that the sample points are distributed
+with a minimum distance both from other points within the same stratum
+and from the stratum borders. If you do not specify a minimum distance
+to the border, the same distance used for spacing between points will be
+applied to the border as well.</p>
+<p>Here’s an example of how to use this function:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Points</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Random_Stratified_Min_Dist.html">Random_Stratified_Min_Dist</a></span><span class="op">(</span>ClassRaster <span class="op">=</span> <span class="va">result</span><span class="op">$</span><span class="va">FinalStack</span>,</span>
+<span>                                     MinDist <span class="op">=</span> <span class="fl">2000</span>,</span>
+<span>                                     BorderDist <span class="op">=</span> <span class="fl">5000</span>,</span>
+<span>                                     n <span class="op">=</span> <span class="fl">30</span>,</span>
+<span>                                     n_to_test <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Joining with `by = join_by(x, y)`</span></span></code></pre></div>
+<p>The resulting plot shows the stratified sampling points overlaid on
+the optimal strata:</p>
+<p><img src="how-to-use-GeoStratR_files/figure-html/plotSampl-1.png" width="700"></p>
+<p>This approach ensures a very balanced sampling:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">Points</span><span class="op">$</span><span class="va">Class</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  A  B  C  D  E </span></span>
+<span><span class="co">#&gt; 30 30 30 30 30</span></span></code></pre></div>
+<p>The Random_Stratified_Min_Dist function is robust and can handle
+cases where some classes cannot achieve the desired number of points.
+For example:</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Points2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Random_Stratified_Min_Dist.html">Random_Stratified_Min_Dist</a></span><span class="op">(</span>ClassRaster <span class="op">=</span> <span class="va">result</span><span class="op">$</span><span class="va">FinalStack</span>,</span>
+<span>                                     MinDist <span class="op">=</span> <span class="fl">2000</span>,</span>
+<span>                                     BorderDist <span class="op">=</span> <span class="fl">10000</span>,</span>
+<span>                                     n <span class="op">=</span> <span class="fl">500</span>,</span>
+<span>                                     n_to_test <span class="op">=</span> <span class="fl">10000</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Joining with `by = join_by(x, y)`</span></span></code></pre></div>
+<p>Even if some classes cannot meet the target of 500 points, the
+function still works effectively:</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">Points2</span><span class="op">$</span><span class="va">Class</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   A   B   C   D   E </span></span>
+<span><span class="co">#&gt; 500 500 500 462 335</span></span></code></pre></div>
+<p>This flexibility ensures that your sampling scheme is both effective
+and adaptable to varying conditions within your study area. By
+maintaining minimum distances, the function helps prevent clustering of
+sample points and ensures a more representative and unbiased sampling
+distribution across the strata.</p>
+</div>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -95,17 +269,21 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Derek Corcoran.</p>
+  <p></p>
+<p>Developed by Derek Corcoran.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
 </div>
 
       </footer>
 </div>
 
-  
+
+
+
 
 
   </body>
