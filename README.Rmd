@@ -16,7 +16,6 @@ knitr::opts_chunk$set(
 # GeoStratR
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/Sustainscapes/GeoStratR/workflows/R-CMD-check/badge.svg)](https://github.com/Sustainscapes/GeoStratR/actions)
 [![R-CMD-check](https://github.com/Sustainscapes/GeoStratR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Sustainscapes/GeoStratR/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
